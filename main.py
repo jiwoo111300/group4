@@ -17,7 +17,7 @@ st.markdown(
 st.title("📘 유리함수 중단원 마무리")
 st.write("유리함수의 개념을 정리하고 문제를 풀며 마무리해 봅시다!")
 
-# ====== 문제 데이터 (예시) ======
+# ====== 문제 데이터 ======
 problems = [
     {"num": 1, "question": "함수 y = 1/x 의 정의역은?", "answer": "x ≠ 0", "level": "하"},
     {"num": 2, "question": "함수 y = 2/x 에서 x=1일 때 y의 값은?", "answer": "2", "level": "하"},
@@ -42,12 +42,16 @@ st.subheader("🧩 문제를 풀어보세요!")
 for p in problems:
     st.markdown(f"**({p['level']}) 문제 {p['num']}. {p['question']}**")
     user_answer = st.text_input(f"문제 {p['num']}의 답을 입력하세요:", key=f"q{p['num']}")
-    
+
     if user_answer:
-        if user_answer.strip() == p["answer"]:
+        # 🔹 띄어쓰기 제거 후 비교
+        clean_user = user_answer.replace(" ", "")
+        clean_answer = p["answer"].replace(" ", "")
+        
+        if clean_user == clean_answer:
             st.success("🎉 너 쫌치네?")
         else:
             st.error("💪 중요한건 꺾이지 않는 마음. 다시 한번 해보자!")
 
 st.write("---")
-st.info("문제를 모두 풀고 나면 위의 입력란에 따라 자동으로 채점됩니다.")
+st.info("답 입력 시 띄어쓰기는 무시하고 채점됩니다.")
